@@ -1,6 +1,6 @@
 package com.clover.edgeservice.controller;
 
-import com.clover.edgeservice.model.Employee;
+import com.clover.edgeservice.model.Project;
 import com.clover.edgeservice.util.feign.CloverCrudServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
-public class EmployeeController {
+@RequestMapping("/project")
+public class ProjectController {
 
-    @Autowired
-    private CloverCrudServiceClient employeeFeignClient;
+    @Autowired CloverCrudServiceClient projectFeignClient;
 
-    @GetMapping("/employee")
+    @GetMapping("/project")
     @ResponseStatus(HttpStatus.OK)
-    public List<Employee> getAllEmployees(){
-        System.out.println("We used this edge service to get all employees.");
-        return employeeFeignClient.getAllEmployees();
+    public List<Project> getAllProjects(){
+        System.out.println("We used this edge service to get all projects.");
+        return projectFeignClient.getAllProjects();
+
     }
+
+
+
 }

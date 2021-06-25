@@ -1,6 +1,6 @@
 package com.clover.edgeservice.controller;
 
-import com.clover.edgeservice.model.Employee;
+import com.clover.edgeservice.model.Log;
 import com.clover.edgeservice.util.feign.CloverCrudServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,16 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
-public class EmployeeController {
+@RequestMapping("/log")
+public class LogController {
 
     @Autowired
-    private CloverCrudServiceClient employeeFeignClient;
+    CloverCrudServiceClient logFeignClient;
 
-    @GetMapping("/employee")
+    @GetMapping("/log")
     @ResponseStatus(HttpStatus.OK)
-    public List<Employee> getAllEmployees(){
-        System.out.println("We used this edge service to get all employees.");
-        return employeeFeignClient.getAllEmployees();
+    public List<Log> getAllLogs(){
+        System.out.println("We used this edge service to get all logs.");
+        return logFeignClient.getAllLogs();
+
     }
+
+
+
 }
