@@ -30,18 +30,18 @@ public class ProjectController {
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Project getOneProject(@PathVariable Integer id)  {
+    public Project getOneProject(@PathVariable int id)  {
         return projectRepo.getById(id);
     }
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateProject(@RequestBody Project project, @PathVariable Integer id ) {
+    public void updateProject(@RequestBody Project project, @PathVariable int id ) {
         projectRepo.save(project);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deleteProject(@PathVariable Integer id){
+    public void deleteProject(@PathVariable int id){
         projectRepo.deleteById(id);
     }
 }

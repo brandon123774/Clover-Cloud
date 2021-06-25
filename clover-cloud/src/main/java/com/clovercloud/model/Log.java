@@ -1,9 +1,11 @@
 package com.clovercloud.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -18,19 +20,20 @@ public class Log implements Serializable {
     private Integer projectId;
     private Integer categoryId;
     private Integer employeeId;
-    private String date;
-    private String timeSpent;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    LocalDateTime timestamp;
+    private double timeSpent;
 
     public Log ()   {
 
     }
 
-    public Log(Integer logId, Integer projectId, Integer categoryId, Integer employeeId, String date, String timeSpent) {
+    public Log(Integer logId, Integer projectId, Integer categoryId, Integer employeeId, LocalDateTime timestamp, double timeSpent) {
         this.logId = logId;
         this.projectId = projectId;
         this.categoryId = categoryId;
         this.employeeId = employeeId;
-        this.date = date;
+        this.timestamp = timestamp;
         this.timeSpent = timeSpent;
     }
 
@@ -66,19 +69,19 @@ public class Log implements Serializable {
         this.employeeId = employeeId;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public String getTimeSpent() {
+    public double getTimeSpent() {
         return timeSpent;
     }
 
-    public void setTimeSpent(String timeSpent) {
+    public void setTimeSpent(double timeSpent) {
         this.timeSpent = timeSpent;
     }
 
@@ -87,12 +90,12 @@ public class Log implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Log log = (Log) o;
-        return Objects.equals(logId, log.logId) && Objects.equals(projectId, log.projectId) && Objects.equals(categoryId, log.categoryId) && Objects.equals(employeeId, log.employeeId) && Objects.equals(date, log.date) && Objects.equals(timeSpent, log.timeSpent);
+        return Double.compare(log.timeSpent, timeSpent) == 0 && Objects.equals(logId, log.logId) && Objects.equals(projectId, log.projectId) && Objects.equals(categoryId, log.categoryId) && Objects.equals(employeeId, log.employeeId) && Objects.equals(timestamp, log.timestamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(logId, projectId, categoryId, employeeId, date, timeSpent);
+        return Objects.hash(logId, projectId, categoryId, employeeId, timestamp, timeSpent);
     }
 
     @Override
@@ -102,8 +105,8 @@ public class Log implements Serializable {
                 ", projectId=" + projectId +
                 ", categoryId=" + categoryId +
                 ", employeeId=" + employeeId +
-                ", date='" + date + '\'' +
-                ", timeSpent='" + timeSpent + '\'' +
+                ", timestamp=" + timestamp +
+                ", timeSpent=" + timeSpent +
                 '}';
     }
 }
