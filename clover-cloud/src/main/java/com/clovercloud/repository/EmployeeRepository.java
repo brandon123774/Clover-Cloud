@@ -6,4 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository <Employee, Integer> {
+//    Employee addEmployee(Employee employee);
+//    Employee getOneEmployee(Integer employeeId);
+//    List<Employee> getAllEmployees();
+//    List<Employee> findAllEmployeesBySameFirstName(String firstName);
+
 }

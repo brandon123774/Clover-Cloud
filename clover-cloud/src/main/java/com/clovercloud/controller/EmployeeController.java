@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
+
 public class EmployeeController {
 
     @Autowired
@@ -32,7 +33,5 @@ public class EmployeeController {
     public Employee getOneEmployee(@PathVariable Integer employeeId) {
         return employeeRepo.getById(employeeId);
     }
-
-
 
 }

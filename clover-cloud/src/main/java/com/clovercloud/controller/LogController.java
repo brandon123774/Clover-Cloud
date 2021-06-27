@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/log")
+
 public class LogController {
 
     @Autowired
@@ -37,6 +38,10 @@ public class LogController {
     @ResponseStatus(HttpStatus.OK)
     public void updateLog(@RequestBody Log log) {
         logRepo.save(log);
+    }
+    @DeleteMapping(value = "/{id}")
+    public void deleteProject(@PathVariable Integer id){
+        logRepo.deleteById(id);
     }
 
 }
