@@ -1,6 +1,5 @@
 package com.clovercloud.dto;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class ProjectEmployeeLog {
@@ -9,7 +8,7 @@ public class ProjectEmployeeLog {
     private String projectName;
     private String categoryName;
     private String firstName;
-    LocalDateTime timestamp;
+    private String timestamp;
     private double timeSpent;
 
     public Integer getLogId() {
@@ -44,11 +43,11 @@ public class ProjectEmployeeLog {
         this.firstName = firstName;
     }
 
-    public LocalDateTime getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

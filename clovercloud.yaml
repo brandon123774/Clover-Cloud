@@ -1,0 +1,432 @@
+openapi: 3.0.3
+info:
+  title: Api Documentation
+  description: Api Documentation
+  termsOfService: 'urn:tos'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+  version: '1.0'
+servers:
+  - url: 'http://localhost:8143'
+    description: Inferred Url
+tags:
+  - name: employee-controller
+    description: Employee Controller
+  - name: log-controller
+    description: Log Controller
+  - name: project-controller
+    description: Project Controller
+paths:
+  /employee:
+    get:
+      tags:
+        - employee-controller
+      summary: getAllEmployees
+      operationId: getAllEmployeesUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - employee-controller
+      summary: createEmployee
+      operationId: createEmployeeUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/employee/{employeeId}':
+    get:
+      tags:
+        - employee-controller
+      summary: getOneEmployee
+      operationId: getOneEmployeeUsingGET
+      parameters:
+        - name: employeeId
+          in: path
+          description: employeeId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /log:
+    get:
+      tags:
+        - log-controller
+      summary: getAllLogs
+      operationId: getAllLogsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Log'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - log-controller
+      summary: createLog
+      operationId: createLogUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Log'
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Log'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/log/employee/{id}':
+    get:
+      tags:
+        - log-controller
+      summary: getLogDataByEmployeeId
+      operationId: getLogDataByEmployeeIdUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectEmployeeLog'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/log/{id}':
+    put:
+      tags:
+        - log-controller
+      summary: updateLog
+      operationId: updateLogUsingPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Log'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - log-controller
+      summary: deleteProject
+      operationId: deleteProjectUsingDELETE
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/log/{logId}':
+    get:
+      tags:
+        - log-controller
+      summary: getOneLog
+      operationId: getOneLogUsingGET
+      parameters:
+        - name: logId
+          in: path
+          description: logId
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Log'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /project:
+    get:
+      tags:
+        - project-controller
+      summary: getAllProjects
+      operationId: getAllProjectsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - project-controller
+      summary: createProject
+      operationId: createProjectUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/project/{id}':
+    get:
+      tags:
+        - project-controller
+      summary: getOneProject
+      operationId: getOneProjectUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - project-controller
+      summary: updateProject
+      operationId: updateProjectUsingPUT
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - project-controller
+      summary: deleteProject
+      operationId: deleteProjectUsingDELETE_1
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  schemas:
+    Employee:
+      title: Employee
+      type: object
+      properties:
+        email:
+          type: string
+        employeeId:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+        lastName:
+          type: string
+    Log:
+      title: Log
+      type: object
+      properties:
+        categoryName:
+          type: string
+        employeeId:
+          type: integer
+          format: int32
+        logId:
+          type: integer
+          format: int32
+        projectId:
+          type: integer
+          format: int32
+        timeSpent:
+          type: number
+          format: double
+        timestamp:
+          type: string
+    Project:
+      title: Project
+      type: object
+      properties:
+        hoursPlanned:
+          type: integer
+          format: int32
+        projectId:
+          type: integer
+          format: int32
+        projectName:
+          type: string
+        projectStatus:
+          type: string
+    ProjectEmployeeLog:
+      title: ProjectEmployeeLog
+      type: object
+      properties:
+        categoryName:
+          type: string
+        firstName:
+          type: string
+        logId:
+          type: integer
+          format: int32
+        projectName:
+          type: string
+        timeSpent:
+          type: number
+          format: double
+        timestamp:
+          type: string

@@ -77,7 +77,7 @@ public class LogController {
                         empLog.setFirstName(((Employee)employee.get()).getFirstName());
                         empLog.setCategoryName(log.getCategoryName());
                         empLog.setProjectName(((Project)proj.get()).getProjectName());
-                        empLog.setTimestamp(log.getTimestamp());
+                        empLog.setTimestamp(log.getTimestamp().toString());
                         empLog.setTimeSpent(log.getTimeSpent());
 
                         projectEmployeeLogList.add(empLog);
