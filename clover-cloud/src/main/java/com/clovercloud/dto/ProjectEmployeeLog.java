@@ -5,21 +5,12 @@ import java.util.Objects;
 
 public class ProjectEmployeeLog {
 
-        private Integer logId;
-        private String projectName;
-        private String categoryName;
-        private String firstName;
-        LocalDateTime timestamp;
-        private double timeSpent;
-
-    public ProjectEmployeeLog(Integer logId, String projectName, String categoryName, String firstName, LocalDateTime timestamp, double timeSpent) {
-        this.logId = logId;
-        this.projectName = projectName;
-        this.categoryName = categoryName;
-        this.firstName = firstName;
-        this.timestamp = timestamp;
-        this.timeSpent = timeSpent;
-    }
+    private Integer logId;
+    private String projectName;
+    private String categoryName;
+    private String firstName;
+    LocalDateTime timestamp;
+    private double timeSpent;
 
     public Integer getLogId() {
         return logId;
