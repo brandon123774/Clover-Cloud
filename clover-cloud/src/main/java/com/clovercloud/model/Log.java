@@ -22,26 +22,26 @@ public class Log implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer logId;
     private Integer projectId;
-    private Integer categoryId;
+    private String categoryName;
     private Integer employeeId;
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     LocalDateTime timestamp;
+
     private double timeSpent;
 
-    public Log ()   {
-
-    }
-
-    public Log(Integer logId, Integer projectId, Integer categoryId, Integer employeeId, LocalDateTime timestamp, double timeSpent) {
+    public Log(Integer logId, Integer projectId, String categoryName, Integer employeeId, LocalDateTime timestamp, double timeSpent) {
         this.logId = logId;
         this.projectId = projectId;
-        this.categoryId = categoryId;
+        this.categoryName = categoryName;
         this.employeeId = employeeId;
         this.timestamp = timestamp;
         this.timeSpent = timeSpent;
+    }
+
+    public Log() {
     }
 
     public Integer getLogId() {
@@ -60,12 +60,12 @@ public class Log implements Serializable {
         this.projectId = projectId;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Integer getEmployeeId() {
@@ -97,12 +97,12 @@ public class Log implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Log log = (Log) o;
-        return Double.compare(log.timeSpent, timeSpent) == 0 && Objects.equals(logId, log.logId) && Objects.equals(projectId, log.projectId) && Objects.equals(categoryId, log.categoryId) && Objects.equals(employeeId, log.employeeId) && Objects.equals(timestamp, log.timestamp);
+        return Double.compare(log.timeSpent, timeSpent) == 0 && Objects.equals(logId, log.logId) && Objects.equals(projectId, log.projectId) && Objects.equals(categoryName, log.categoryName) && Objects.equals(employeeId, log.employeeId) && Objects.equals(timestamp, log.timestamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(logId, projectId, categoryId, employeeId, timestamp, timeSpent);
+        return Objects.hash(logId, projectId, categoryName, employeeId, timestamp, timeSpent);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class Log implements Serializable {
         return "Log{" +
                 "logId=" + logId +
                 ", projectId=" + projectId +
-                ", categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
                 ", employeeId=" + employeeId +
                 ", timestamp=" + timestamp +
                 ", timeSpent=" + timeSpent +
